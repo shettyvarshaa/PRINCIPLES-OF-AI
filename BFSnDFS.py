@@ -1,49 +1,56 @@
+# Define the graph as an adjacency list
 graph = {
-    '1' : ['2','3'],
-    '2' : ['4', '5'],
-    '3' : ['6','7'],
-    '4' : [],
-    '5' : [],
-    '6' : [],
-    '7' : []
+    '1': ['2', '3'],
+    '2': ['4', '5'],
+    '3': ['6', '7'],
+    '4': [],
+    '5': [],
+    '6': [],
+    '7': []
 }
 
-visited = []
-queue = []
+# Initialize lists to track visited nodes and the queue for BFS
+visited_bfs = []
+queue_bfs = []
 
-def bfs(visited, graph, node):
-    visited.append(node)
-    queue.append(node)
-    while queue:
-        m=queue.pop(0)
-        print(m,end=" ")
-        for neighbour in graph[m]:
+def bfs(visited, graph, start_node):
+    visited.append(start_node)
+    queue_bfs.append(start_node)
+
+    while queue_bfs:
+        current_node = queue_bfs.pop(0)
+        print(current_node, end=" ")
+
+        for neighbour in graph[current_node]:
             if neighbour not in visited:
                 visited.append(neighbour)
-                queue.append(neighbour)
+                queue_bfs.append(neighbour)
 
-print("here is the code for breadth first search")
-bfs(visited,graph,'1')  # call function with starting node as '1
+print("Breadth First Search:")
+bfs(visited_bfs, graph, '1')  # Call function with starting node as '1'
 print()
 
-graph2 = {
-    '1' : ['2','3'],
-    '2' : ['4', '5'],
-    '3' : ['6','7'],
-    '4' : [],
-    '5' : [],
-    '6' : [],
-    '7' : []
+# Define another graph as an adjacency list
+graph_dfs = {
+    '1': ['2', '3'],
+    '2': ['4', '5'],
+    '3': ['6', '7'],
+    '4': [],
+    '5': [],
+    '6': [],
+    '7': []
 }
 
-visited = set()
+# Initialize a set to track visited nodes for DFS
+visited_dfs = set()
 
-def dfs(visited, graph, node):
-    if node not in visited:
-        print(node, end=" ")
-        visited.add(node)
-        for neighbour in graph2[node]:
-            dfs(visited,graph,neighbour)
+def dfs(visited, graph, current_node):
+    if current_node not in visited:
+        print(current_node, end=" ")
+        visited.add(current_node)
 
-print("here is the code for depth first search")
-dfs(visited,graph2,'1')   # call function with starting node as '1
+        for neighbour in graph[current_node]:
+            dfs(visited, graph, neighbour)
+
+print("Depth First Search:")
+dfs(visited_dfs, graph_dfs, '1')  # Call function with starting node as '1'
